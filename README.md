@@ -1,0 +1,1 @@
+Minimo Keyboard es un teclado Android de entrada de texto basado en InputMethodService. Está pensado para ofrecer una experiencia simple y altamente configurable, con funcionamiento local y sin depender de conexión a Internet. La versión 1.26 incorpora además navegación mediante DPAD y soporte para dispositivos Android TV y equipos sin pantalla táctil.

@@ -1,3 +1,4 @@
+
 # Minimo Keyboard
 
 Teclado Android personalizable, con foco en una interfaz compacta, temas visuales y funciones prácticas para escribir. Proyecto desarrollado en Kotlin para Android Studio.
@@ -67,3 +68,6 @@ Abrí un issue con la versión de Android, el modelo del dispositivo, los pasos 
 ## Licencia
 
 Este proyecto se distribuye bajo la licencia MIT. Consultá el archivo [`LICENSE`](LICENSE).
+=======
+Minimo Keyboard es un teclado Android de entrada de texto basado en InputMethodService. Está pensado para ofrecer una experiencia simple y altamente configurable, con funcionamiento local y sin depender de conexión a Internet. La versión 1.26 incorpora además navegación mediante DPAD y soporte para dispositivos Android TV y equipos sin pantalla táctil.
+>>>>>>> 5997819e0a4d05f9f2f28119f0e8bcb49d8ea2b0

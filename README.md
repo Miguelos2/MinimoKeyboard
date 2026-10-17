@@ -1,5 +1,48 @@
-
 # Minimo Keyboard
+
+<table style="border-collapse: collapse; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <caption style="caption-side: top; padding: 10px; font-size: 18px; font-weight: bold; background: #fff; border-bottom: 1px solid #e0e0e0;">
+    Galería — haz clic para ver al 100%
+  </caption>
+
+  <tr>
+    <td style="padding: 10px; text-align: center; border: 1px solid #e0e0e0;">
+      <a href="https://github.com/user-attachments/assets/1d9444da-fd93-4a5d-b601-1cf9eb7091e6"
+         target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+        <img src="https://github.com/user-attachments/assets/1d9444da-fd93-4a5d-b601-1cf9eb7091e6"
+             alt="Multimedia" loading="lazy"
+             style="width: 288px; height: auto; display: block; border-radius: 6px; cursor: pointer;">
+      </a>
+    </td>
+    <td style="padding: 10px; text-align: center; border: 1px solid #e0e0e0;">
+      <a href="https://github.com/user-attachments/assets/3007598e-5420-40a4-a6c4-9e4b6308079f"
+         target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+        <img src="https://github.com/user-attachments/assets/3007598e-5420-40a4-a6c4-9e4b6308079f"
+             alt="Multimedia (3)" loading="lazy"
+             style="width: 288px; height: auto; display: block; border-radius: 6px; cursor: pointer;">
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px; text-align: center; border: 1px solid #e0e0e0;">
+      <a href="https://github.com/user-attachments/assets/93a5d894-ad40-4c8d-b8c9-1fa4c2226af1"
+         target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+        <img src="https://github.com/user-attachments/assets/93a5d894-ad40-4c8d-b8c9-1fa4c2226af1"
+             alt="Multimedia (2)" loading="lazy"
+             style="width: 288px; height: auto; display: block; border-radius: 6px; cursor: pointer;">
+      </a>
+    </td>
+    <td style="padding: 10px; text-align: center; border: 1px solid #e0e0e0;">
+      <a href="https://github.com/user-attachments/assets/e5f646ce-4f91-4578-976c-d552054f1e62"
+         target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+        <img src="https://github.com/user-attachments/assets/e5f646ce-4f91-4578-976c-d552054f1e62"
+             alt="Multimedia (1)" loading="lazy"
+             style="width: 288px; height: auto; display: block; border-radius: 6px; cursor: pointer;">
+      </a>
+    </td>
+  </tr>
+</table>
 
 Teclado Android personalizable, con foco en una interfaz compacta, temas visuales y funciones prácticas para escribir. Proyecto desarrollado en Kotlin para Android Studio.
 

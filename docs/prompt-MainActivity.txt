@@ -1,0 +1,179 @@
+Actúa como un desarrollador Android senior especializado en teclados (InputMethodService)
+y en UI programática sin librerías externas. Necesito que generes el archivo
+`MainActivity.kt` completo para la pantalla de Ajustes de mi app "Minimo Keyboard",
+un teclado QWERTY minimalista para Android.
+
+CONTEXTO DEL PROYECTO
+- Paquete: com.miguel.keyboard
+- Ya existe un `MiguelKeyboardService` (InputMethodService) que expone la constante
+  `ACTION_SETTINGS_CHANGED` y escucha cambios de preferencias por broadcast.
+- Ya existe un layout XML `activity_main.xml` con todos los IDs que menciono abajo,
+  pero quiero que reorganices su contenido programáticamente en pestañas.
+- Todas las preferencias se guardan en `SharedPreferences("keyboard", MODE_PRIVATE)`.
+- El idioma del teclado se guarda en la clave `keyboard_language` con valores
+  "es", "pt", "en", "ja".
+- El color del teclado se guarda en `keyboard_color` con claves como "black",
+  "cloud", "ferrari", "nezuko", etc.
+- El proyecto usa BuildConfig.VERSION_NAME para mostrar la versión.
+
+REQUISITOS FUNCIONALES
+
+1) SISTEMA DE PESTAÑAS (tabs) HORIZONTALES
+   - Implementa una barra de pestañas fija en la parte superior (fuera del ScrollView
+     vertical) con scroll horizontal.
+   - Crea una clase privada `EdgeFrictionHorizontalScrollView` que extienda
+     HorizontalScrollView y añada resistencia progresiva al llegar a los bordes
+     (efecto "rubber band" tipo iOS). La resistencia debe ser 0.22 cerca del borde
+     y aumentar a 1.0 al alejarse. Usa un umbral de 42dp.
+   - Las pestañas deben ser TextViews con fondo redondeado (GradientDrawable,
+     cornerRadius 20dp), tamaño 101x38dp, padding horizontal 12dp, texto en
+     negrita 12sp, con icono emoji + etiqueta traducida.
+   - Iconos: ⌨ ✓ ♫ ♪ ↕ ◉ 文 ☷
+   - Pestañas en este orden: "minimo", "activation", "vibration", "music",
+     "size", "rgb", "language", "phrases".
+   - Solo una sección visible a la vez. La pestaña activa se colorea con el color
+     de acento del teclado; si el color es claro, el texto se vuelve oscuro.
+   - Al cambiar de idioma, las etiquetas de las pestañas deben actualizarse.
+
+2) DISTRIBUCIÓN DE CONTROLES EN PESTAÑAS
+   Usa un mapa `sectionFor(id)` que asigne cada vista existente a una pestaña:
+   - "minimo": tvTitle, tvSubtitle, tvSoundDescription, switchNumberRow
+   - "activation": tvActivation, tvActivationSteps, btnEnable
+   - "vibration": tvVibrationTitle, switchVibration, switchTypewriterSound,
+     tvVibration, seekVibration
+   - "music": tvMusicTickerTitle, switchMusicTicker, tvMusicTickerDescription
+   - "size": tvHeightTitle, tvKeyboardHeight, seekKeyboardHeight, tvHeightDescription
+   - "rgb": switchRgbMode, tvRgbWave, rgbWaveSpinner, tvColorTitle, colorSpinner
+   - "language": tvLanguageTitle, tvLanguageDescription, languageContainer
+   - "phrases": tvPhrasesTitle, tvPhrasesDescription, phrasesContainer
+   Mueve los hijos del LinearLayout original a contenedores de sección dinámicos.
+   La vista tvVersion debe quedar siempre fuera de las pestañas, al final.
+
+3) CAMPO DE PRUEBA COMPARTIDO Y PERSISTENTE
+   - Crea un LinearLayout con un TextView ("Probá el teclado" / "Test the keyboard"
+     / etc.) y un EditText multilínea (máx 3 líneas).
+   - Este bloque debe estar FUERA de las pestañas, entre el host de secciones y
+     la versión, para que el foco y el teclado del sistema no colapsen al navegar.
+   - Al iniciar, haz `requestFocus()` sobre el EditText y muestra el teclado suave
+     con `InputMethodManager.SHOW_IMPLICIT` en un `post {}`.
+   - El borde del EditText debe usar el color de acento actual.
+
+4) MAPA DE PULSACIONES (heatmap) LOCAL
+   - Añade un TextView de título "Mapa de pulsaciones · uso local" y un LinearLayout
+     con fondo GradientDrawable (color #14161C, cornerRadius 14dp, borde #414B5F).
+   - Pinta tres filas de teclas: "qwertyuiop", "asdfghjkl", "zxcvbnm".
+   - Cada celda es un TextView de 28dp de alto, texto blanco 12sp, fondo con color
+     calculado: `Color.rgb(25, 55 + intensity/2, 75 + intensity)` donde
+     `intensity = n * 170 / maxCount` (coerce 0..170).
+   - Los conteos se leen de SharedPreferences con prefijo "heat_" (ej. "heat_a" = 42).
+   - Añade una nota gris: "Se cuentan teclas, no palabras ni contenido. Cerrá y
+     volvé a abrir Ajustes para actualizar."
+
+5) SELECTOR DE COLOR
+   - Spinner `R.id.colorSpinner` con 15 opciones: cloud, yellow, sky, bubblegum,
+     waifu, eva, nezuko, pumpkin, gray_nardo, olive, gameboy, ferrari, black,
+     transparent, blur.
+   - Cada opción tiene su Color RGB específico (usa los que ves en el código:
+     cloud=245,245,240; ferrari=255,40,0; nezuko=245,145,190, etc.).
+   - Los nombres se traducen a es/pt/en/ja con un mapa `localizedColorName(key)`.
+   - Cada fila del spinner es un TextView con fondo del color de la opción, texto
+     blanco u oscuro según luminancia (`isLightColor`), borde adaptativo
+     (`adjustOptionBorder`), cornerRadius 8dp.
+   - Al cambiar color: guarda en prefs, actualiza colores de títulos, reconfigura
+     el selector RGB y envía broadcast.
+
+6) SELECTOR DE IDIOMA
+   - `R.id.languageContainer` es un LinearLayout horizontal con 4 botones
+     (TextView con bandera + código: 🇪🇸 ES, 🇧🇷 PT, 🇬🇧 EN, 🇯🇵 JA).
+   - Cada botón pesa 1f, 54dp de alto, cornerRadius 10dp, borde 2dp si está activo.
+   - Al pulsar: guarda `keyboard_language`, actualiza botones, aplica traducciones
+     y envía broadcast.
+
+7) SELECTOR DE ONDA RGB
+   - Spinner `R.id.rgbWaveSpinner` con 7 modos: expanding, spiral, circle, edges,
+     zigzag, equalizer, zoom.
+   - Traducciones a es/pt/en/ja.
+   - Cada fila del spinner usa el color de fondo del teclado actual.
+   - Deshabilitado si `rgb_mode_enabled` es false.
+
+8) EDICIÓN DE FRASES RÁPIDAS
+   - `R.id.phrasesContainer` debe mostrar 10 filas, cada una con un EditText
+     (peso 1, 48dp alto, fondo #121212, borde #373737, cornerRadius 8dp) y un
+     ImageButton con `R.drawable.ic_save` (48x48dp, tinte blanco).
+   - Al pulsar guardar: guarda en `phrase_N` (N=1..10), envía broadcast, vibra corto
+     y hace una animación de escala (0.88 → 1.0 en 160ms totales).
+   - Las frases por defecto son: "Voy a casa.", "Yendo.", "Te amo.",
+     "Hola! Buenos dias!", "Ya lo hago.", "Donde queda eso?", "Si.", "No.",
+     "Buenisimo.", "Ahora voy.".
+
+9) CONTROLES DE VIBRACIÓN Y TAMAÑO
+   - switchVibration: prefs "vibration_enabled" (default true).
+   - seekVibration: máximo 20, progress = prefs "vibration_strength" / 5
+     (default 45 → progress 9). Al soltar, vibra 1 segundo con la amplitud
+     calculada. Texto: "Intensidad: X% · soltá el control para probar durante
+     1 segundo".
+   - seekKeyboardHeight: progress = prefs "keyboard_height_percent" - 70
+     (rango 70..100). Texto: "Altura: X%".
+
+10) OTROS SWITCHES
+    - switchTypewriterSound: "typewriter_sound_enabled" (default false).
+    - switchRgbMode: "rgb_mode_enabled" (default false). Al activarlo, habilita
+      el spinner RGB. Debe mostrar el texto "RGB Mode" con las letras R, G, B
+      coloreadas en rojo, verde y azul usando SpannableStringBuilder y
+      ForegroundColorSpan.
+    - switchNumberRow: "number_row_enabled" (default false).
+    - switchMusicTicker: "music_ticker_enabled" (default false). Al activarlo,
+      lanza `Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)` con runCatching.
+
+11) TRADUCCIONES COMPLETAS (mapa `t`)
+    Debes incluir todas las cadenas visibles en 4 idiomas: subtitle, activation,
+    steps, open, vibration, vibrateKey, typewriter, numberRow, music, musicSwitch,
+    musicDesc, rgb, rgbWave, soundDesc, height, heightDesc, language,
+    languageDesc, color, phrases, phrasesDesc, version, intensity, test.
+    Usa las traducciones exactas que aparecen en el código (incluido el "voseo"
+    argentino en español: "Probá", "Elegí", "Editá", "Tocá", "soltá").
+
+12) AYUDAS (helpTextForLanguage)
+    Añade un TextView gris (14sp, padding 8dp) al inicio de la pestaña "minimo"
+    con instrucciones de gestos: deslizar derecha→espacio, doble→punto,
+    izquierda→borrar, arriba/abajo→frases, mantener letra→mayúscula, mantener ?→
+    selector !@., mantener Enter→ajustes, mantener emoji→teclado emoji,
+    mantener espacio+deslizar→mover cursor.
+
+13) COLORES DINÁMICOS DE TÍTULOS (updateSectionTitleColors)
+    Aplica a tvTitle, tvActivation, tvVibrationTitle, tvHeightTitle, tvColorTitle,
+    tvLanguageTitle, tvPhrasesTitle, tvMusicTickerTitle un color de acento según
+    el tema activo (ferrari→255,105,75; eva→150,95,220; gameboy→138,172,15;
+    nezuko→245,145,190; etc.; default→Color.RED).
+
+14) BURBUJA DE VERSIÓN (updateVersionBubble)
+    tvVersion debe ser un TextView con padding 10x5dp, cornerRadius 16dp, fondo
+    con alfa 210 del color activo, texto blanco u oscuro según luminancia,
+    borde adaptativo.
+
+15) VIBRACIÓN
+    Implementa `vibrateShort()` (18ms) y `vibrateConfiguredForOneSecond()` (1000ms)
+    usando VibrationEffect.createOneShot en API 26+ y vibrate(ms) en versiones
+    anteriores. Amplitud = 1 + strength * 254 / 100 (coerce 1..255).
+    Respeta `vibration_enabled`.
+
+16) UTILIDADES
+    - `dp(value: Int): Int` que multiplica por density y coerceAtLeast(1).
+    - `sendSettingsChanged()` que emite `Intent(MiguelKeyboardService.ACTION_SETTINGS_CHANGED).setPackage(packageName)`.
+    - `isLightColor(color): Boolean` con luminancia (0.299R + 0.587G + 0.114B > 160).
+    - `adjustOptionBorder(color): Int` que devuelve negro con alfa 90 si es claro,
+      blanco con alfa 120 si es oscuro.
+
+RESTRICCIONES
+- NO uses Jetpack Compose, ni Material Components, ni librerías externas.
+- Todo el UI debe ser View clásico + GradientDrawable + Typeface.DEFAULT.
+- No uses ViewBinding ni DataBinding.
+- Usa `findViewById` clásico.
+- El código debe compilar tal cual, sin dependencias añadidas.
+- Mantén exactamente los nombres de claves de SharedPreferences que te he indicado.
+- El archivo debe ser un único `MainActivity.kt` autocontenido (más la clase
+  privada EdgeFrictionHorizontalScrollView en el mismo archivo).
+
+ENTREGABLE
+Devuelve solo el código completo de `MainActivity.kt`, con imports incluidos,
+listo para pegar en Android Studio.

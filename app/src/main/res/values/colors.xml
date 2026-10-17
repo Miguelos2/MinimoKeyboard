@@ -1,0 +1,8 @@
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="key_dark">#111111</color>
+    <color name="key_pressed">#2A2A2A</color>
+    <color name="text_secondary">#AAAAAA</color>
+    <color name="accent_red">#FF0000</color>
+</resources>

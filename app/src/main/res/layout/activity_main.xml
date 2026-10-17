@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MINIMO KEYBOARD"
+            android:textColor="#FF0000"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:id="@+id/tvSubtitle"
+            android:text="Teclado minimalista QWERTY · AMOLED · offline"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:id="@+id/tvActivation"
+            android:text="Activación"
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:id="@+id/tvActivationSteps"
+            android:text="1. Abrí los ajustes de teclados de Android.
+2. Activá Minimo Keyboard.
+3. Elegilo como teclado predeterminado."
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnEnable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#330000"
+            android:text="ABRIR AJUSTES DE TECLADO"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:id="@+id/tvVibrationTitle"
+            android:text="Vibración"
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:id="@+id/switchVibration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Vibrar al pulsar una tecla"
+            android:textColor="#FFFFFF" />
+
+        <Switch
+            android:id="@+id/switchTypewriterSound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Sonido de máquina de escribir"
+            android:textColor="#FFFFFF" />
+
+        <Switch
+            android:id="@+id/switchNumberRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Línea de números sobre el teclado"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/tvMusicTickerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="MusicTicker"
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:id="@+id/switchMusicTicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Mostrar canción actual sobre el teclado"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:id="@+id/tvMusicTickerDescription"
+            android:text="Muestra título/artista en desplazamiento y permite reproducir o pausar. Al activarlo se solicita acceso a sesiones multimedia."
+            android:textColor="#666666"
+            android:textSize="12sp" />
+
+        <Switch
+            android:id="@+id/switchRgbMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:checked="false"
+            android:text="RGB Mode"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:id="@+id/tvRgbWave"
+            android:text="Onda RGB"
+            android:textColor="#AAAAAA"
+            android:textSize="13sp" />
+
+        <Spinner
+            android:id="@+id/rgbWaveSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:id="@+id/tvSoundDescription"
+            android:text="Reproduce un pequeño sonido mecánico al pulsar una tecla."
+            android:textColor="#666666"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvVibration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp" />
+
+        <SeekBar
+            android:id="@+id/seekVibration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="45" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:id="@+id/tvHeightTitle"
+            android:text="Altura del teclado"
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvKeyboardHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#AAAAAA"
+            android:textSize="14sp" />
+
+        <SeekBar
+            android:id="@+id/seekKeyboardHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="30"
+            android:progress="30" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:id="@+id/tvHeightDescription"
+            android:text="100% = altura normal · 70% = altura mínima"
+            android:textColor="#666666"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/tvLanguageTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Idioma del teclado"
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:id="@+id/tvLanguageDescription"
+            android:text="Elegí Español, Português o English. El cambio se aplica al layout y a los símbolos."
+            android:textColor="#666666"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/languageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:id="@+id/tvColorTitle"
+            android:text="Color del teclado"
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/colorSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:id="@+id/tvPhrasesTitle"
+            android:text="Frases rápidas"
+            android:textColor="#FF0000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:id="@+id/tvPhrasesDescription"
+            android:text="Editá cada frase y tocá el disquete para guardarla. Se muestran en el teclado al deslizar de abajo hacia arriba."
+            android:textColor="#666666"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/phrasesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+        </FrameLayout>
+
+    </LinearLayout>
+</ScrollView>

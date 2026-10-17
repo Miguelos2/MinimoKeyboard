@@ -1,0 +1,30 @@
+# Gradle / Android builds
+.gradle/
+**/build/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Signing credentials and local secrets
+*.jks
+*.keystore
+keystore.properties
+secrets.properties
+.env
+.env.*
+
+# macOS / editors
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+*.swo
+*~
